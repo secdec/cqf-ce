@@ -1,0 +1,4 @@
+####
+# A list of packages proposed for addition to packages.needed.01.txt.
+# Keep the list (roughly) in alphabetical order, to facilitate git merging.
+#

@@ -1,0 +1,34 @@
+{
+  "id" : null,
+  "design" : {
+    "objectKey" : "com.siegetechnologies.cqf.design.item.util.workspace",
+    "object" : null
+  },
+  "parameterBindings" : [ ],
+  "execution" : null,
+  "children" : [ {
+    "objectKey" : null,
+    "object" : {
+      "id" : null,
+      "design" : {
+        "objectKey" : "com.siegetechnologies.cqf.design.item.node.astam_ubuntu",
+        "object" : null
+      },
+      "parameterBindings" : [ ],
+      "execution" : null,
+      "children" : [ {
+        "objectKey" : null,
+        "object" : {
+          "id" : null,
+          "design" : {
+            "objectKey" : "com.siegetechnologies.cqf.design.item.hardware.cqf_test_scheduling",
+            "object" : null
+          },
+          "parameterBindings" : [ ],
+          "execution" : null,
+          "children" : [ ]
+        }
+      } ]
+    }
+  } ]
+}

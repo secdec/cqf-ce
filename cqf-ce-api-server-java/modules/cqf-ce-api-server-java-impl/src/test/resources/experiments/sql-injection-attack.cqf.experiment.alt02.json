@@ -1,0 +1,122 @@
+{
+	"id": null,
+	"design": {
+		"objectRole": null,
+		"objectKey": "com.siegetechnologies.cqf.design.item.archetype.multinode"
+	},
+	"parameterBindings": [
+		{
+			"name": "attacker_host",
+			"value": "SEE NOTES",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		},
+		{
+			"name": "attackee_host",
+			"value": "SEE NOTES",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		},
+		{
+			"name": "attackee_port",
+			"value": "SEE NOTES",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		},
+		{
+			"name": "attackee_database_host",
+			"value": "SEE NOTES",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		},
+		{
+			"name": "attackee_database_port",
+			"value": "SEE NOTES",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		}
+	],
+	"execution": null,
+	"children": [
+		{
+			"objectRole": "attacker",
+			"object": {
+				"id": null,
+				"design": {
+					"objectRole": null,
+					"objectKey": "com.siegetechnologies.cqf.design.item.attacker.esm_7"
+				},
+				"parameterBindings": [
+					{
+						"name": "attack_config_file_as_blob",
+						"value": "SEE NOTES",
+						"codec": [
+							"base64",
+							"parameter_expansion"
+						]
+					},
+					{
+						"name": "TARGET_IP",
+						"value": "SEE NOTES",
+						"codec": [
+							"injected",
+							"parameter_expansion"
+						]
+					}
+				],
+				"execution": null
+			}
+		},
+		{
+			"objectRole": "attackee",
+			"object": {
+				"id": null,
+				"design": {
+					"objectRole": null,
+					"objectKey": "com.siegetechnologies.cqf.design.item.attackee.dotcms"
+				},
+				"parameterBindings": [
+					{
+						"name": "database_connection_url",
+						"value": "SEE NOTES",
+						"codec": [
+							"parameter_expansion"
+						]
+					}
+				],
+				"execution": null
+			}
+		},
+		{
+			"objectRole": "attackee_database",
+			"object": {
+				"id": null,
+				"design": {
+					"objectRole": null,
+					"objectKey": "com.siegetechnologies.cqf.design.item.database.mysql"
+				},
+				"parameterBindings": [
+					{
+						"name": "schema_file_as_blob",
+						"value": "SEE NOTES",
+						"codec": [
+							"base64",
+							"parameter_expansion"
+						]
+					}
+				],
+				"execution": null
+			}
+		}
+	]
+}

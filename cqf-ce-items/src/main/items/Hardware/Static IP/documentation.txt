@@ -1,0 +1,7 @@
+@info Sets IP addresses for the adapter
+@param Adapter Number - The index of the network adapter being set.
+@param Address - The IP Address to statically set.
+@param Netmask - The netmask for the network adapter.
+@param Gateway - The network Gateway address.
+@param Initialize Network (Linux Only) - Set the interfaces configuration files for the network adapter.
+@param Reboot (Linux Only) - Reboot the machine.

@@ -1,0 +1,60 @@
+{
+  "name": "IP Address Configuration",
+  "parameters": [
+    {
+      "label": "Adapter Number",
+      "name": "ADAPTERNUM",
+      "type": "string",
+      "required": true,
+      "defaultValue": "1"
+    },
+    {
+      "label": "Address",
+      "name": "IPADDRESS",
+      "type": "string",
+      "required": false,
+      "defaultValue": "192.168.${cqf.genclassb}"
+    },
+    {
+      "label": "Netmask",
+      "name": "NETMASK",
+      "type": "string",
+      "required": false,
+      "defaultValue": "255.255.0.0"
+    },
+    {
+      "label": "Gateway",
+      "name": "GATEWAY",
+      "type": "string",
+      "required": false,
+      "defaultValue": "192.168.1.1"
+    },
+    {
+      "name": "INITIALIZE_NETWORK",
+      "label": "Initialize Network (Linux Only)",
+      "type": "checkbox",
+      "defaultValue": true
+    },
+    {
+      "label": "Initialize Script Duration (Windows)",
+      "type": "int",
+      "required": false,
+      "name": "windows_initialize_duration",
+      "defaultValue": "12"
+    },
+    {
+      "label": "Cleanup Script Duration (Windows)",
+      "type": "int",
+      "required": false,
+      "name": "windows_cleanup_duration",
+      "defaultValue": "5"
+    },
+    {
+      "label": "Initialize Script Duration (Unix)",
+      "type": "int",
+      "required": false,
+      "name": "unix_initialize_duration",
+      "defaultValue": "120"
+    }
+  ]
+}

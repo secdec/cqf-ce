@@ -1,0 +1,14 @@
+--- .bash_profile.orig	2016-11-11 15:29:41.818182002 -0500
++++ .bash_profile	2016-11-11 15:28:39.222182002 -0500
+@@ -10,3 +10,11 @@
+ PATH=$PATH:$HOME/.local/bin:$HOME/bin
+
+ export PATH
++
++# Adjust TERM
++
++case "$TERM" in
++screen.*)
++	TERM=vt100
++	;;
++esac

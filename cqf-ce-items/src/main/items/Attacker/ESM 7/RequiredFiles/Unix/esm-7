@@ -1,0 +1,199 @@
+#!/bin/bash
+###
+# #%L
+# astam-cqf-ce-items
+# %%
+# Copyright (C) 2009 - 2017 Siege Technologies, LLC
+# %%
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# #L%
+###
+
+
+
+##
+## "Enhanced SqlMap" script to execute a CAPEC-7 attack
+##
+## Orchestrates various utilities to derive associated parameters to drive
+##   sqlmap scan via its REST API. Places the data and log results in:
+##      ~/esm7-data.json
+##      ~/esm7-log.json
+##
+## Application Security Threat Attack Modeling (ASTAM)
+##
+## Copyright (C) 2017 Applied Visions - http://securedecisions.com
+##
+## Written by Aspect Security - http://aspectsecurity.com
+##
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+##
+##     http://www.apache.org/licenses/LICENSE-2.0
+##
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+##
+
+function printHelp {
+  echo "Usage: `basename $1` attackfile"
+  echo "  -v: verbose"
+  echo "  -h: help"
+  exit
+}
+
+function fatalError {
+  echo "ERROR: $1" 1>&2
+  exit
+}
+
+function say {
+  if [ "$verbose" ]; then
+    echo "$@"
+  fi
+}
+
+function progress {
+  if [ "$verbose" ]; then
+    echo -ne "$@"
+  fi
+}
+
+# global variables
+topDir=`dirname "$0"`
+loginCli="$topDir/login-cli"
+
+# anything on the command line?
+if [ "$#" = "0" ]; then
+  printHelp $0
+fi
+
+# parse options
+OPTIND=1
+while getopts "vh" opt; do
+  case "$opt" in
+    v)
+      verbose=1
+      ;;
+    *)
+      printHelp $0
+      ;;
+  esac
+done
+shift $((OPTIND-1))
+attackfile=$@
+
+# do we have attack configuration?
+if [ -z "$attackfile" ]; then
+  fatalError "attackfile must be specified"
+fi
+if [ ! -f "$attackfile" ]; then
+  fatalError "$attackfile does not exist"
+fi
+
+say "loading attack configuration file ($attackfile)..."
+. "$attackfile"
+
+if [ -z "$sqliURL" ]; then
+  fatalError "SQL injection target URL must be specified"
+fi
+
+say "got target URL $sqliURL"
+
+if [ ! -z "$loginURL" ]; then
+  say "login URL: $loginURL"
+  if [ -z "$loginPOST" ]; then
+    say "no login POST data - just grabbing session cookies..."
+    cookies=`"$loginCli" -n "$loginURL"`
+  else
+    say "attempting to authenticate..."
+    cookies=`"$loginCli" -p "$loginPOST" "$loginURL"`
+  fi
+  if [ -z "$cookies" ]; then
+    say "no cookies obtained - make sure the login data are correct"
+  else
+    say "obtained session cookies: $cookies"
+  fi
+fi
+
+# set the initial sqlmap REST api options
+attackOpt="\"level\": 5, \"getBanner\": true, \"batch\": true, \"answers\": \"redirect to=N,detect backend=N,extended UNION=Y,extending provided risk=N,keep testing the others=N\","
+
+# process the configuration parameters and set sqlmap options
+if [ ! -z "$sqliPOST" ]; then
+  attackOpt="$attackOpt \"data\": \"$sqliPOST\","
+fi
+
+if [ ! -z "$sqliParam" ]; then
+  attackOpt="$attackOpt \"testParameter\": \"$sqliParam\","
+fi
+
+# sqlmap REST api doesn't support forcing a DBMS
+# if [ ! -z "$sqliDB" ]; then
+#   attackOpt="$attackOpt \"dbms=\": \"$sqliDB\","
+# fi
+
+if [ ! -z "$cookies" ]; then
+  attackOpt="$attackOpt \"cookie\": \"$cookies\","
+fi
+
+say "initializing task via sqlmap api"
+smtaskid=$(curl -s "http://127.0.0.1:8775/task/new" 2>&1 | grep -o -I '[a-f0-9]\{16\}')
+
+say "... got task id $smtaskid"
+echo $smtaskid > /tmp/sqlmap-taskid
+
+say "starting task via sqlmap api using {$attackOpt \"url\": \"$sqliURL\"}"
+curl -s -H "Content-Type: application/json" -X POST -d "{$attackOpt \"url\": \"$sqliURL\"}" "http://127.0.0.1:8775/scan/$smtaskid/start" > /dev/null 2>&1
+
+progress "waiting for completion"
+
+# check initial status
+status=$(curl -s -H "Content-Type: application/json" -X GET "http://127.0.0.1:8775/scan/$smtaskid/status" 2>&1 | grep 'status' | cut -d \" -f 4)
+if [ "not running" == "$status" ]; then
+    # send error message to STDERR
+    echo "sqlmap api command never started" >&2
+    exit 1
+fi
+
+# wait for task to complete
+while [ "terminated" != "$status" ]
+do
+  progress "."
+  sleep 1
+  status=$(curl -s -H "Content-Type: application/json" -X GET "http://127.0.0.1:8775/scan/$smtaskid/status" 2>&1 | grep 'status' | cut -d \" -f 4)
+done
+
+say ""
+say "attack complete"
+
+# set initial output
+output="{ \"data_response\": "
+
+# get data output
+output="$output $(curl -s "http://127.0.0.1:8775/scan/$smtaskid/data") "
+
+# set next element
+output="$output, \"log_response\": "
+
+# get log output
+output="$output $(curl -s "http://127.0.0.1:8775/scan/$smtaskid/log") "
+
+# close json
+
+output="$output}"
+
+echo "$output" | python -m json.tool > /cqf/result

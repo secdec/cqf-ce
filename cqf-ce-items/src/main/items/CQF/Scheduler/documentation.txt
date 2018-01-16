@@ -1,0 +1,7 @@
+@info Handles out-of-band scheduling for experiments that can operate
+@info independently of CQF during their run phase.  The run phase itself is
+@info divided into six slots: initialize, setup, start sensors, main, stop
+@info sensors, and cleanup.  Each slot is identified by an offset in
+@info minutes from the start of the run phase within the experiment's
+@info overall execution lifecycle.
+

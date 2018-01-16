@@ -1,0 +1,23 @@
+{
+  "name": "dotCMS",
+  "parameters": [
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_cleanup_duration",
+      "defaultValue": "5"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_initialize_duration",
+      "defaultValue": "5"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_setup_duration",
+      "defaultValue": "240"
+    }
+  ]
+}

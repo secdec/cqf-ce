@@ -1,0 +1,683 @@
+##
+## CQF CE REST API
+##
+## @author srogers
+## Copyright (C) 2016 - 2017 Applied Visions, Inc.
+##  Licensed under the Apache License, Version 2.0 (the "License");
+##	you may not use this file except in compliance with the License.
+##	You may obtain a copy of the License at
+##
+##		http://www.apache.org/licenses/LICENSE-2.0
+##
+##	Unless required by applicable law or agreed to in writing, software
+##	distributed under the License is distributed on an "AS IS" BASIS,
+##	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+##	See the License for the specific language governing permissions and
+##	limitations under the License.
+##
+swagger: '2.0'
+
+info:
+  title: |
+    CQF CE
+  version: |
+    1.0.0-SNAPSHOT
+  description: |
+    Essential Resources for CQF CE (Cyber Quantification Framework, Community Edition).
+  license:
+    name:
+      Apache 2.0
+    url:
+      http://www.apache.org/licenses/LICENSE-2.0.html
+
+host: localhost:8080
+
+schemes:
+  - https
+
+basePath: /api/v1
+
+produces:
+  - application/json
+
+paths:
+  /experiment_design_catalogs:
+    get:
+      operationId: |
+        get_experiment_design_catalogs
+      summary: |
+        Get matching experiment design catalogs.
+      description: |
+        TBD.
+      tags:
+        - Experiment Design Catalogs
+      parameters:
+        - name: name_regexp
+          description: pattern selecting the desired experiment design catalog(s) by name.
+          required: false
+          type: string
+          in: query
+      responses:
+        200:
+          description: |
+            Set of (matching) experiment design catalogs.
+          schema:
+            type:
+              array
+            items:
+              $ref: '#/definitions/ExperimentDesignCatalog'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_design_catalogs/{name}:
+    get:
+      operationId: |
+        get_experiment_design_catalog
+      summary: |
+        Get experiment design catalog by unique name.
+      description: |
+        TBD.
+      parameters:
+        - name: name
+          description: uniquely identifies the design catalog.
+          required: true
+          type: string
+          in: path
+      tags:
+        - Experiment Design Catalogs
+      responses:
+        200:
+          description: |
+            Specified experiment design catalog.
+          schema:
+            $ref: '#/definitions/ExperimentDesignCatalog'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_designs:
+    get:
+      operationId: |
+        get_experiment_designs
+      summary: |
+        Get matching experiment designs.
+      description: |
+        TBD.
+      parameters:
+        - name: subtype_regexp
+          description: pattern selecting the desired experiment design(s) by subtype.
+          required: false
+          type: string
+          in: query
+        - name: category_regexp
+          description: pattern selecting the desired experiment design(s) by category.
+          required: false
+          type: string
+          in: query
+      tags:
+        - Experiment Designs
+      responses:
+        200:
+          description: |
+            Set of (matching) experiment designs.
+          schema:
+            type:
+              array
+            items:
+              $ref: '#/definitions/ExperimentDesignElement'
+              #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/ExperimentDesign'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_designs/{name}:
+    get:
+      operationId: |
+        get_experiment_design
+      summary: |
+        Get experiment design by unique name.
+      description: |
+        TBD.
+      parameters:
+        - name: name
+          description: uniquely identifies the experiment design.
+          required: true
+          type: string
+          in: path
+      tags:
+        - Experiment Designs
+      responses:
+        200:
+          description: |
+            Specified experiment design.
+          schema:
+            $ref: '#/definitions/ExperimentDesignElement'
+            #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/ExperimentDesign'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_design_elements:
+    get:
+      operationId: |
+        get_experiment_design_elements
+      summary: |
+        Get matching experiment design elements.
+      description: |
+        TBD.
+      parameters:
+        - name: subtype_regexp
+          description: pattern selecting desired experiment design element(s) by subtype.
+          required: false
+          type: string
+          in: query
+        - name: category_regexp
+          description: pattern selecting desired experiment design element(s) by category.
+          required: false
+          type: string
+          in: query
+      tags:
+        - Experiment Design Elements
+      responses:
+        200:
+          description: |
+            Set of (matching) experiment design elements.
+          schema:
+            type:
+              array
+            items:
+              $ref: '#/definitions/ExperimentDesignElement'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_design_elements/{name}:
+    get:
+      operationId: |
+        get_experiment_design_element
+      summary: |
+        Get experiment design element by unique name.
+      description: |
+        TBD.
+      parameters:
+        - name: name
+          description: uniquely identifies the experiment design element.
+          required: true
+          type: string
+          in: path
+      tags:
+        - Experiment Design Elements
+      responses:
+        200:
+          description: |
+            Specified experiment design element.
+          schema:
+            $ref: '#/definitions/ExperimentDesignElement'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiments:
+    get:
+      operationId: |
+        get_experiments
+      summary: |
+        Get matching experiments.
+      description: |
+        TBD.
+      parameters:
+        - name: execution_phase_regexp
+          description: pattern selecting desired experiment(s) by execution phase.
+          required: false
+          type: string
+          in: query
+      tags:
+        - Experiments
+      responses:
+        200:
+          description: |
+            Set of (matching) experiments still underway or recently executed.
+          schema:
+            type:
+              array
+            items:
+              $ref: '#/definitions/ExperimentElement'
+              #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/Experiment'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    post:
+      operationId: |
+        create_and_execute_experiment
+      summary: |
+        Create and execute experiment.
+      description: |
+        TBD.
+      parameters:
+        - name: experiment
+          description: new experiment to be created and executed.
+          required: true
+          schema:
+            $ref: '#/definitions/ExperimentElement'
+            #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/ExperimentDesign'
+          in: body
+      tags:
+        - Experiments
+      responses:
+        200:
+          description: |
+            Created experiment, including ID and current execution state.
+          schema:
+            $ref: '#/definitions/ExperimentElement'
+            #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/Experiment'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiments/{id}:
+    get:
+      operationId: |
+        get_experiment
+      summary: |
+        Get experiment by unique ID.
+      description: |
+        TBD.
+      parameters:
+        - name: id
+          description: uniquely identifies the experiment.
+          required: true
+          type: string
+          in: path
+      tags:
+        - Experiments
+      responses:
+        200:
+          description: |
+            Specified experiment.
+          schema:
+            $ref: '#/definitions/ExperimentElement'
+            #^-- FIXME: GENERATOR: srogers: alias type $ref: '#/definitions/Experiment'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_elements:
+    get:
+      operationId: |
+        get_experiment_elements
+      summary: |
+        Get matching experiment elements.
+      description: |
+        TBD.
+      parameters:
+        - name: subtype_regexp
+          description: pattern selecting desired experiment element(s) by subtype.
+          required: false
+          type: string
+          in: query
+        - name: category_regexp
+          description: pattern selecting desired experiment element(s) by category.
+          required: false
+          type: string
+          in: query
+      tags:
+        - Experiment Elements
+      responses:
+        200:
+          description: |
+            Set of (matching) experiment elements.
+          schema:
+            type:
+              array
+            items:
+              $ref: '#/definitions/ExperimentElement'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /experiment_elements/{id}:
+    get:
+      operationId: |
+        get_experiment_element
+      summary: |
+        Get experiment element by unique ID.
+      description: |
+        TBD.
+      parameters:
+        - name: id
+          description: uniquely identifies the experiment element.
+          required: true
+          type: string
+          in: path
+      tags:
+        - Experiment Elements
+      responses:
+        200:
+          description: |
+            Specified experiment element.
+          schema:
+            $ref: '#/definitions/ExperimentElement'
+        default:
+          description: |
+            Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+  Error:
+    type:
+      object
+    properties:
+      code:
+        type:
+          integer
+        format:
+          int32
+      message:
+        type:
+          string
+
+  ParameterBinding:
+    type:
+      object
+    properties:
+      name:
+        type:
+          string
+        description: |
+          Parameter's name.
+      value:
+        type:
+          string
+        description: |
+          Parameter's value.
+      codec:
+        type:
+          array
+        items:
+          type:
+            string
+##        enum:
+##          ["base64", "injected", "parameter_expansion", "variable_substitution", "zip"]
+          description: |
+            A single step in the overall encoding/decoding transformation for a value.
+
+            The codec steps currently supported are:
+            ["base64", "injected", "parameter_expansion", "variable_substitution", "zip"]
+
+            By convention, when more than one codec step is involved, they are listed in receiver order.
+            That is, the order in which a receiver should apply the transformation steps to decode the value.
+
+            NB: The codec step "parameter_expansion" is deprecated; use "variable_substitution" instead.
+          #^-- FIXME: GENERATOR: srogers: enum type $ref: '#/definitions/ValueCodecStep'
+        description: |
+          Encoding/decoding step(s) for the parameter's value.
+
+  Parameter:
+    type:
+      object
+    properties:
+      name:
+        type:
+          string
+        description: |
+          Uniquely identifies a parameter of a particular experiment design element.
+
+          Format: simple word or phrase; no punctuation; spaces are allowed.
+      description:
+        type:
+          string
+        description: |
+          Brief one-sentence description of this parameter and its purpose.
+      type:
+        type:
+          string
+        description: |
+          Value type of the parameter.
+        #^-- FIXME: srogers: enumerate all supported parameter value types.
+      required:
+        type:
+          boolean
+        description: |
+          Whether a binding for the parameter is required.
+      default_binding:
+        $ref: '#/definitions/ParameterBinding'
+
+  ExperimentDesignElementRef:
+    type:
+      object
+    properties:
+      object_role:
+        type:
+          string
+        description: |
+          The role of the experiment design element in this association; can be null.
+      object_key:
+        type:
+          string
+        description: |
+          Uniquely identifies an experiment design element; can be null.
+
+          Format: follows Java's reverse-domain naming convention.
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/ExperimentDesignElementName'
+      object:
+        $ref: '#/definitions/ExperimentDesignElement'
+    description: |
+      A reference to an experiment design element.
+
+      Normally, a ref provides either an object's key or the object itself;
+      it is never necessary to provide both (although you can).
+
+  ExperimentDesignElement:
+    type:
+      object
+    properties:
+      name:
+        type:
+          string
+        description: |
+          Uniquely identifies an experiment design element.
+
+          Format: follows Java's reverse-domain naming convention.
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/ExperimentDesignElementName'
+      description:
+        type:
+          string
+        description: |
+          Brief one-sentence description of this design element and its purpose.
+      documentation:
+        type:
+          string
+        description: |
+          Detailed behavior specification for this design element.
+        #^-- TODO: FEATURE: srogers: support Markdown in documentation text
+      subtype:
+        type:
+          string
+        description: |
+          Behavior specialization subtype of an experiment (design) element.
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/BehaviorSubtype'
+      category:
+        type:
+          string
+        description: |
+          Principal category of an experiment (design) element within a catalog.
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/Category'
+      parameters:
+        type:
+          array
+        items:
+          $ref: '#/definitions/Parameter'
+        description: |
+          All parameters of this design element.
+      default_parameter_bindings:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ParameterBinding'
+        description: |
+          Default name/value pairs that bind to the experiment design element's parameters.
+          Usually overridden by bindings provided by corresponding experiment elements.
+          The scope of these bindings covers this element and its children.
+      children:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ExperimentDesignElementRef'
+        description: |
+          All children of this design element.
+    description: |
+      An experiment design is a DAG (directed acyclic graph) of experiment design elements.
+      The experiment design itself is the root element of the DAG.
+
+  ExperimentDesignCatalog:
+    type:
+      object
+    properties:
+      name:
+        type:
+          string
+        description: |
+          Uniquely identifies an experiment design catalog.
+
+          Format: follows Java's reverse-domain naming convention.
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/ExperimentDesignCatalogName'
+      description:
+        type:
+          string
+        description: |
+          Brief description of this design catalog and its contents.
+      items:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ExperimentDesignElementRef'
+        description: |
+          All items in this design catalog.
+
+  ExecutionTraceRecord:
+    type:
+      object
+    properties:
+      value:
+        type:
+          string
+    description: |
+      Individual record within an execution trace.
+    #^-- TODO: DESIGN: srogers: give ExecutionTraceRecord some properties
+
+  ExecutionState:
+    type:
+      object
+    properties:
+      phase:
+        type:
+          string
+##      enum:
+##        ["initialize", "run", "retrieve_data", "cleanup", "done"]
+        description: |
+          Execution phase of a particular experiment (element).
+
+          The experiment execution phases are (in order): ["initialize", "run", "retrieve_data", "cleanup", "done"].
+        #^-- FIXME: GENERATOR: srogers: enum type $ref: '#/definitions/ExecutionPhase'
+        #^-- FIXME: GENERATOR: srogers: enum qualifier on type string
+      trace:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ExecutionTraceRecord'
+        description: |
+          Execution trace of a particular experiment (element).
+      results:
+        type:
+          string
+        description: |
+          The result of this experiment; available once execution has completed.
+
+          Format: base64-encoded; experiment-dependent beyond that.
+          Typical base64-decoded content types include: plain text, or a zip file.
+
+          FIXME: srogers: rename property to 'result'.
+
+  ExperimentElementRef:
+    type:
+      object
+    properties:
+      object_role:
+        type:
+          string
+        description: |
+          The role of the experiment element in this association; can be null.
+      object_key:
+        type:
+          string
+        description: |
+          Uniquely identifies an experiment element; can be null.
+
+          Format: universally unique identifier (https://en.wikipedia.org/wiki/Universally_unique_identifier).
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/ExperimentElementID'
+      object:
+        $ref: '#/definitions/ExperimentElement'
+    description: |
+      A reference to an experiment element.
+
+      Normally, a ref provides either an object's key or the object itself;
+      it is never necessary to provide both (although you can).
+
+  ExperimentElement:
+    type:
+      object
+    properties:
+      id:
+        type:
+          string
+        description: |
+          Uniquely identifies an experiment element.
+
+          Format: universally unique identifier (https://en.wikipedia.org/wiki/Universally_unique_identifier).
+        #^-- FIXME: GENERATOR: srogers: scalar type $ref: '#/definitions/ExperimentElementID'
+      design:
+        $ref: '#/definitions/ExperimentDesignElementRef'
+        description: |
+          The experiment design element upon which this experiment element is based.
+      parameter_bindings:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ParameterBinding'
+        description: |
+          Name/value pairs that bind to the design element's parameters.
+      execution:
+        $ref: '#/definitions/ExecutionState'
+      children:
+        type:
+          array
+        items:
+          $ref: '#/definitions/ExperimentElementRef'
+        description: |
+          All children of this experiment element.
+    description: |
+      An experiment is a DAG (directed acyclic graph) of experiment elements.
+      The experiment itself is the root element of the DAG.

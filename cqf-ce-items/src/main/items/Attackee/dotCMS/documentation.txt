@@ -1,0 +1,1 @@
+@info An attackee with known security vulnerabilities: an early version of dotCMS.

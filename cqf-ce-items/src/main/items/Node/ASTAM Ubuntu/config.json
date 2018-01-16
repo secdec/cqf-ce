@@ -1,0 +1,35 @@
+{
+  "name": "ASTAM Ubuntu",
+  "extends": {
+    "name": "Clone VM",
+    "category": "Node"
+  },
+  "parameters": [
+    {
+      "name": "name",
+      "defaultValue": "ASTAM Ubuntu 64-bit"
+    },
+    {
+      "name": "adminusername",
+      "type": "string",
+      "defaultValue": "root",
+      "required": true
+    },
+    {
+      "name": "adminpassword",
+      "type": "string",
+      "defaultValue": "test123",
+      "required": true
+    },
+    {
+      "label": "Platform",
+      "name": "platform",
+      "type": "string",
+      "defaultValue": "Unix",
+      "required": true
+    }
+  ],
+  "requires": {
+    "package": true
+  }
+}

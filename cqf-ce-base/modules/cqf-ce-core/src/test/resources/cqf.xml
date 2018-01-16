@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  cqf-ce-core
+  %%
+  Copyright (C) 2009 - 2017 Siege Technologies, LLC
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE config>
+<!-- This is a sample configuration file used for the Cyber Quantification
+	Framework. This configuration file is processed by the Apache Commons Configuration
+	library, and as such supports variable interpolation. The entries in this
+	configuration file are marked with: * mandatory - for properties that must
+	be present in a real configuration file * optional - for properties that
+	are optional in a real configuration file * auxiliary - for properties defined
+	for interpolation within other values. If these properties are not used by
+	other properties in the file, they can be removed safely. Note that Apache
+	Commons Configuration supports interpolation of environment variables as
+	well. If the CQF applications are being run as webapps within Tomcat, it
+	may be useful to define properties in terms of ${env:CATALINA_HOME} or ${env:CATALINA_BASE}. -->
+<config>
+	<!-- (auxiliary) -->
+	<cqfHome>/home/user/cqf</cqfHome>
+
+	<cqf>
+		<!-- (auxiliary) -->
+		<itemsRoot>${cqfHome}/cqf-webapp/items</itemsRoot>
+
+		<!-- (mandatory) -->
+		<itemDirectories>
+			<directory>${cqf.itemsRoot}/bar</directory>
+			<directory>${cqf.itemsRoot}/baz</directory>
+			<directory>${cqf.itemsRoot}/quux</directory>
+		</itemDirectories>
+
+		<quantify>
+			<default>
+				<tries>1</tries>
+				<delay>3</delay>
+				<unit>seconds</unit>
+			</default>
+			<initialize>
+				<tries>5</tries>
+			</initialize>
+			<retrieve_data>
+				<delay>5</delay>
+				<tries>3</tries>
+			</retrieve_data>
+			<cleanup>
+				<delay>15</delay>
+				<tries>5</tries>
+			</cleanup>
+
+		</quantify>
+	</cqf>
+
+	<cmp>
+		<!-- (auxiliary) -->
+		<itemsRoot>${cqfHome}/cmp-webapp/items</itemsRoot>
+
+		<!-- (mandatory) -->
+		<itemDirectories>
+			<directory>${cmp.itemsRoot}/bar</directory>
+			<directory>${cmp.itemsRoot}/baz</directory>
+		</itemDirectories>
+
+		<!-- (mandatory) -->
+		<parseDirectory>${cqfHome}/cmp-webapp/parse</parseDirectory>
+	</cmp>
+</config>

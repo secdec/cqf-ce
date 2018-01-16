@@ -1,0 +1,54 @@
+## -*- mode: ruby -*-
+## vi: set ft=ruby :
+##
+
+creating_base_box_p = false
+
+Vagrant.require_version ">= 1.8.0"
+
+##
+
+vm_index = 2
+vm_name  = "cqf-testbed"
+
+vm_cpu_count = 1
+vm_memory    = 2*1024 # MiB
+
+vm_box = "sdr01810/CentOS-7.2-x86_64"
+
+vm_ip_address = "192.168.100.#{150 + vm_index}"
+
+##
+
+Vagrant.configure(2) do |config|
+  config.ssh.insert_key = ! creating_base_box_p
+
+  config.vm.box = vm_box
+  config.vm.box_check_update = false
+
+  config.vm.provider "virtualbox" do |provider|
+    provider.gui = false
+    provider.memory = vm_memory
+    provider.customize [
+      "modifyvm", :id,
+      "--cpus", "#{vm_cpu_count}",
+      "--name", "#{vm_name}",
+    ]
+  end
+
+  config.vbguest.auto_update = true
+  config.vbguest.no_install  = ! creating_base_box_p
+  config.vbguest.no_remote   = true
+
+  config.vm.hostname = "#{vm_name}.local"
+
+  config.vm.network "private_network", ip: vm_ip_address unless creating_base_box_p
+
+  config.vm.synced_folder "../../resources", "/vagrant"
+
+  config.vm.provision "shell", inline: <<-END
+    for f1 in /vagrant/deployment/provision.sh ; do
+      chmod +rx "$f1" ; sudo "$f1" testbed
+    done
+  END
+end

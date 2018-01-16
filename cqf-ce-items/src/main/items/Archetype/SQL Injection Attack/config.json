@@ -1,0 +1,11 @@
+{
+  "name": "SQL Injection Attack",
+  "parameters": [
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_setup_duration",
+      "defaultValue": "5"
+    }
+  ]
+}

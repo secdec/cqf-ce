@@ -1,0 +1,17 @@
+{
+    "name": "Result Sensor",
+    "result_files": [
+        {
+            "target_file": "/cqf/result",
+            "local_destination": "result"
+        }
+    ],
+    "parameters": [
+        {
+            "type": "int",
+            "required": false,
+            "name": "unix_setup_duration",
+            "defaultValue": "5"
+        }
+    ]
+}

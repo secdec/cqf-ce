@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is a sample configuration file used for the Cyber Quantification
+	Framework. This configuration file is processed by the Apache Commons Configuration
+	library, and as such supports variable interpolation. The entries in this
+	configuration file are marked with: * mandatory - for properties that must
+	be present in a real configuration file * optional - for properties that
+	are optional in a real configuration file * auxiliary - for properties defined
+	for interpolation within other values. If these properties are not used by
+	other properties in the file, they can be removed safely. Note that Apache
+	Commons Configuration supports interpolation of environment variables as
+	well. If the CQF applications are being run as webapps within Tomcat, it
+	may be useful to define properties in terms of ${env:CATALINA_HOME} or ${env:CATALINA_BASE}. 
+	
+	Copyright (C) 2016 - 2017 Applied Visions, Inc.
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+	-->
+<config>
+	<!-- (auxiliary) Final '/' in directory parameters is a little odd but it
+		makes it easier to append more directory names in a platform independent
+		way. (But maybe Java will accept '/' everywhere?) -->
+	<cqfHome>/home/vagrant/opt/cqf/</cqfHome>
+
+	<cqf>
+		<!-- (auxiliary) -->
+		<itemsRoot>${cqfHome}etc/items/</itemsRoot>
+
+		<!-- (mandatory) -->
+		<itemDirectories>
+			<directory>${cqf.itemsRoot}items-siege</directory>
+			<directory>${cqf.itemsRoot}items-av</directory>
+			<directory>${cqf.itemsRoot}items-aq</directory>
+			<directory>${cqf.itemsRoot}items-core</directory>
+			<directory>${cqf.itemsRoot}items-misc</directory>
+			<directory>${cqf.itemsRoot}items-custom</directory>
+
+			<!-- Added as part of the CTM module -->
+			<directory>${cqf.itemsRoot}items-cmp</directory>
+			<directory>${cqf.itemsRoot}items-cmp-aq</directory>
+			<directory>${cqf.itemsRoot}items-cmp-custom</directory>
+
+			<!-- Added as part of the ASTAM support -->
+			<directory>${cqf.itemsRoot}items-astam</directory>
+
+            <!-- CTM specific items -->
+			<directory>${cqf.itemsRoot}items-ctm</directory>
+		</itemDirectories>
+
+		<!-- (mandatory) -->
+		<database>
+			<user>root</user>
+			<password></password>
+			<url>jdbc:mysql://localhost:3306/db</url>
+		</database>
+
+		<!-- This section is used to specify the behavior of the high level quantification
+			process. For each test phase (initialize, run, retrieve_data, and cleanup)
+			a number of tries can be specified, such that if the test phase fails, it
+			will be retried up to that many times. Between successive attempts, a delay
+			will be injected. The time unit and measure of this delay can also be specified. -->
+		<quantify>
+			<!-- Specify default values to be used for all test phases that do not
+				override them. The default is to make only a single attempt for a phase.
+				The default setting for inter-attempt delay is 3 seconds. -->
+			<default>
+				<tries>1</tries>
+				<delay>3</delay>
+				<unit>seconds</unit>
+			</default>
+
+			<!-- Override for INITIALIZE, try the phase up to 5 times with the default
+				inter-attempt delay. -->
+			<initialize>
+				<tries>5</tries>
+			</initialize>
+
+			<!-- Override for RETRIEVE_DATA, try the phase up to 5 times with the
+				default inter-attempt delay. -->
+			<retrieve_data>
+				<tries>5</tries>
+			</retrieve_data>
+
+			<!-- Override for CLEANUP, try the phase up to 5 times, but with an
+				increased inter-attempt delay. -->
+			<cleanup>
+				<tries>5</tries>
+				<delay>10</delay>
+			</cleanup>
+		</quantify>
+	</cqf>
+
+	<cmp>
+		<!-- (mandatory) -->
+		<itemDirectories>
+			<directory>${cqf.itemsRoot}items-cmp</directory>
+			<directory>${cqf.itemsRoot}items-cmp-aq</directory>
+			<directory>${cqf.itemsRoot}items-cmp-custom</directory>
+		</itemDirectories>
+
+		<!-- (mandatory) -->
+		<parseDirectory>${cqf.itemsRoot}parse</parseDirectory>
+	</cmp>
+
+	<aae>
+		<database>
+			<WindowsConfiguration>
+				<!-- (optional) default is to include all fields -->
+				<exclude>hostName</exclude>
+				<exclude>hotfixes</exclude> <!-- legacy field -->
+				<exclude>owner</exclude>
+				<exclude>organization</exclude>
+				<exclude>installDate</exclude>
+				<exclude>bootTime</exclude>
+				<exclude>bootDevice</exclude>
+				<exclude>pageMax</exclude>
+				<exclude>pageAvailable</exclude>
+				<exclude>pageLocations</exclude>
+				<exclude>domain</exclude>
+				<exclude>logonServer</exclude>
+				<exclude>networkCards</exclude>
+			</WindowsConfiguration>
+		</database>
+	</aae>
+
+</config>

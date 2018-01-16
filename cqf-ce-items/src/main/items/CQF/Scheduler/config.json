@@ -1,0 +1,73 @@
+{
+  "name": "CQF Scheduler",
+  "result_files": [
+    {
+      "target_file": "/cqf/cqf.log",
+      "local_destination": "cqf.log"
+    },
+    {
+      "target_file": "/cqf/cqferror.json",
+      "local_destination": "cqferror.json"
+    },
+    {
+      "target_file": "/cqf/cqferrors.txt",
+      "local_destination": "cqferrors.txt"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "INITIALIZE_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "SETUP_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "STARTSENSORS_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "MAIN_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "STOPSENSORS_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "CLEANUP_MINUTE",
+      "type": "integer",
+      "required": true,
+      "defaultValue": "0"
+    },
+    {
+      "name": "run_as_user_during_run_slot_main",
+      "type": "checkbox",
+      "required": false,
+      "defaultValue": false
+    },
+    {
+      "name": "userusername",
+      "type": "string",
+      "defaultValue": "user",
+      "required": true
+    },
+    {
+      "name": "userpassword",
+      "type": "string",
+      "defaultValue": "user123",
+      "required": true
+    }
+  ]
+}

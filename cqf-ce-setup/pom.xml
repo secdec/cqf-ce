@@ -1,0 +1,123 @@
+<!-- -*- tab-width: 4; fill-column: 96 -*- 
+	Copyright (C) 2016 - 2017 Applied Visions, Inc.
+
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
+
+		http://www.apache.org/licenses/LICENSE-2.0
+
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific language governing permissions and
+	limitations under the License.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.secdec</groupId>
+		<artifactId>astam-cqf-ce</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>astam-cqf-ce-setup</artifactId>
+	<packaging>pom</packaging>
+
+	<description>ASTAM CQF CE Setup/Installation Scripts</description>
+	<name>${project.artifactId}</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Siege Technologies, LLC</name>
+		<url>https://siegetechnologies.com/</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>srogers</id>
+			<name>Stephen Rogers</name>
+			<email>inbox.c7r@steve-rogers.com</email>
+			<organization>Siege Technologies, LLC</organization>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<distributionManagement/>
+
+	<issueManagement/>
+
+	<scm/>
+
+	<reporting>
+		<plugins>
+		</plugins>
+	</reporting>
+
+	<dependencyManagement>
+	<dependencies/>
+	</dependencyManagement>
+
+	<dependencies/>
+
+	<modules/>
+
+	<build>
+		<pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>${license-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>process-sources</phase>
+						<goals><goal>update-file-header</goal></goals>
+						<configuration>
+							<inceptionYear>2017</inceptionYear>
+							<licenseName>apache_v2</licenseName>
+							<canUpdateCopyright>false</canUpdateCopyright>
+							<canUpdateDescription>false</canUpdateDescription>
+							<canUpdateLicense>false</canUpdateLicense>
+							<emptyLineAfterHeader>true</emptyLineAfterHeader>
+							<roots>
+								<root>src/main.DISABLED</root>
+								<root>src/test.DISABLED</root>
+							</roots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles/>
+</project>

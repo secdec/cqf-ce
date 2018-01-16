@@ -1,0 +1,15 @@
+vSphereLoginInfo.properties
+vSphereLoginInfo_*.properties
+!vSphereLoginInfo_sample.properties
+
+testbedWM.credentials.root.properties
+testbedWM.credentials.root_*.properties
+!testbedWM.credentials.root_default.properties
+!testbedWM.credentials.root_sample.properties
+
+
+testbedWM.credentials.ubuntu.properties
+testbedWM.credentials.ubuntu_*.properties
+!testbedWM.credentials.ubuntu_default.properties
+!testbedWM.credentials.ubuntu_sample.properties
+

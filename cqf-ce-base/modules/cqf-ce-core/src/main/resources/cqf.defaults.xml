@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  #%L
+  cqf-ce-core
+  %%
+  Copyright (C) 2009 - 2017 Siege Technologies, LLC
+  %%
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  #L%
+  -->
+
+<!DOCTYPE config>
+<!--
+
+	This is a sample configuration file used for the Cyber Quantification Framework.
+	This configuration file is processed by the Apache Commons Configuration library,
+	and as such supports variable interpolation. The entries in this configuration
+	file are marked with:
+
+	* mandatory - for properties that must be present in a real configuration file
+
+	* optional - for properties that are optional in a real configuration file
+
+	* auxiliary - for properties defined for interpolation within other values.
+	If these properties are not used by other properties in the file, they can
+	be removed safely.
+
+	Note that Apache Commons Configuration supports interpolation of environment variables
+	as well. If the CQF applications are being run as webapps within Tomcat, it may
+	be useful to define properties in terms of ${env:CATALINA_HOME} or ${env:CATALINA_BASE}.
+
+-->
+<config>
+	<cqf>
+		<!--
+			Directories to scan for CQF items, one per `directory` element child.
+		-->
+		<itemDirectories>
+			<!-- <directory></directory> -->
+		</itemDirectories>
+
+		<!--
+			Database configuration. user, password, and url
+			properties should be specified. The default driver,
+			and the only one bundled with the CQF "out-of-the-box"
+			is "com.mysql.jdbc.Driver", the MySQL driver.
+		-->
+		<database>
+			<!-- <user>username</user> -->
+			<!-- <password>password</password> -->
+			<!-- <url>jdbc:mysql://localhost:3306/db</url> -->
+			<driver>com.mysql.jdbc.Driver</driver>
+		</database>
+
+		<!-- how many times to attempt cleanup when a test fails in QUANTIFY mode -->
+		<quantify>
+			<cleanupTries>5</cleanupTries>
+		</quantify>
+
+		<!-- Maximum concurrexecutionTasksasks, regardless of backend -->
+		<maxConcurrentTasks>10</maxConcurrentTasks>
+
+		<vsphere>
+			<!-- default values for VSphereUtil#runAction() -->
+			<action>
+				<tries>10</tries>
+				<delay>7</delay>
+				<timeUnit>SECONDS</timeUnit>
+			</action>
+
+			<!-- default values for VSphereUtil#waitForTask() -->
+			<task>
+				<tries>10</tries>
+				<runningDelay>2</runningDelay>
+				<queueDelay>4</queueDelay>
+				<missingDelay>6</missingDelay>
+				<timeUnit>SECONDS</timeUnit>
+			</task>
+		</vsphere>
+	</cqf>
+
+	<cmp>
+		<!-- (mandatory) -->
+		<itemDirectories>
+			<!-- <directory></directory> -->
+		</itemDirectories>
+
+		<!-- (mandatory) -->
+		<!-- <parseDirectory></parseDirectory> -->
+	</cmp>
+
+	<aae>
+		<database>
+			<!-- (optional) default is to include all fields -->
+			<WindowsConfiguration>
+				<!-- <exclude>hostName</exclude> -->
+			</WindowsConfiguration>
+		</database>
+	</aae>
+</config>

@@ -1,0 +1,41 @@
+{
+	"id": null,
+	"design": {
+		"object_role": null,
+		"object_key": "com.siegetechnologies.cqf.design.item.archetype.multinode"
+	},
+	"parameter_bindings": [
+		{
+			"name": "archetype_scenario",
+			"value": "hello world",
+			"codec": [
+				"injected",
+				"parameter_expansion"
+			]
+		}
+	],
+	"execution": null,
+	"children": [
+		{
+			"object_role": "primary_vm",
+			"object": {
+				"id": null,
+				"design": {
+					"object_role": null,
+					"object_key": "com.siegetechnologies.cqf.design.item.package.nil"
+				},
+				"parameter_bindings": [
+					{
+						"name": "primary_vm_parameter_01",
+						"value": "FOO",
+						"codec": [
+							"injected",
+							"parameter_expansion"
+						]
+					}
+				],
+				"execution": null
+			}
+		}
+	]
+}

@@ -1,0 +1,83 @@
+{
+  "name": "System Command",
+  "parameters": [
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_initialize_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_setup_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_startsensors_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_main_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_stopsensors_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_cleanup_duration",
+      "defaultValue": "10"
+    },
+    {
+      "type": "int",
+      "required": false,
+      "name": "duration_in_minutes_for_reboot",
+      "defaultValue": "10"
+    },
+    {
+      "name": "INITCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    },
+    {
+      "name": "SETUPCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    },
+    {
+      "name": "STARTSENSORSCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    },
+    {
+      "name": "MAINCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    },
+    {
+      "name": "STOPSENSORSCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    },
+    {
+      "name": "CLEANUPCOMMAND",
+      "type": "string",
+      "defaultValue": "",
+      "required": true
+    }
+  ]
+}

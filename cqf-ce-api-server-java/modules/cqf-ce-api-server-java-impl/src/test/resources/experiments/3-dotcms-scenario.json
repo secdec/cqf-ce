@@ -1,0 +1,59 @@
+{
+	"id": null,
+	"design":
+	{
+		"object_key": "com.siegetechnologies.cqf.design.item.archetype.dotcms_archetype",
+		"object": null
+	},
+	"parameter_bindings": [
+	{
+		"name": "switchName",
+		"value": "dotcms-switch"
+	},
+	{
+		"name": "networkName",
+		"value": "dotcms-network"
+	},
+	{
+		"name": "attacker_adminusername",
+		"value": "root"
+	},
+	{
+		"name": "attacker_adminpassword",
+		"value": "test123"
+	},
+	{
+		"name": "attacker_vmName",
+		"value": "ASTAM Ubuntu 64-bit"
+	},
+	{
+		"name": "attacker_platform",
+		"value": "Unix"
+	},
+    {
+        "name": "attacker_ip",
+        "value": "192.168.1.29"
+    },
+	{
+		"name": "attackee_adminusername",
+		"value": "root"
+	},
+	{
+		"name": "attackee_adminpassword",
+		"value": "test123"
+	},
+	{
+		"name": "attackee_vmName",
+		"value": "ASTAM Ubuntu 64-bit"
+	},
+	{
+		"name": "attackee_platform",
+		"value": "Unix"
+	},
+    {
+        "name": "attackee_ip",
+        "value": "192.168.1.30"
+    }
+	],
+	"execution": null
+}

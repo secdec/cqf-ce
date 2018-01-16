@@ -1,0 +1,11 @@
+{
+  "name": "System Reboot",
+  "parameters": [
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_initialize_duration",
+      "defaultValue": "180"
+    }
+  ]
+}

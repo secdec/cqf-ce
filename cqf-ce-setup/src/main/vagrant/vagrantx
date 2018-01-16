@@ -1,0 +1,141 @@
+#!/bin/bash
+## A wrapper around vagrant(1); adds a few commands.
+## By Stephen D. Rogers, 2017-03. Use at own risk.
+##
+
+set -e -o pipefail
+
+xx() {
+
+	echo 1>&2 "+" "$@"
+	"$@"
+}
+
+rebuild() {(
+
+	xx :
+	xx cd "$(dirname "$0")"/../../../../build
+	xx mvn clean install -DskipTests=false -Dmaven.javadoc.skip=true
+)}
+
+deployment_prep() {(
+
+	xx :
+	xx cd "$(dirname "$0")"/../resources
+	xx bash deployment.prep.sh
+)}
+
+ensure_first_up_has_occurred() {
+
+	if [ ! -d .vagrant ] ; then
+		echo 1>&2 "First run this: ${0} first-up"
+		exit 2
+	fi
+}
+
+ensure_help_has_not_been_requested() {
+
+	if help_has_been_requested_p "$@" ; then
+		echo 1>&2 "No help available for extra commands."
+		exit 2
+	fi
+}
+
+help_has_been_requested_p() {
+
+	case "${1}" in
+	-h|--help)
+		return 0
+		;;
+	esac
+
+	return 1
+}
+
+list_commands() {
+
+	vagrant list-commands | 
+	perl -lne 'print if s{\s\s+}{ }'
+
+	echo ""
+	echo "Extra:"
+	echo ""
+	cat "$0" |
+	perl -lne 'print if s{^command_(\S+)\s*\(\)(\s*\{\s*#\s*)?}{$1 }' |
+	perl -lne 'print unless m{^list-commands\b}'
+}
+
+##
+
+command_deployment-prep() { # prepare for deployment
+
+	deployment_prep
+}
+
+command_first-up() { # run 'vagrant up' for the first time
+
+	ensure_help_has_not_been_requested "$@"
+
+	xx :
+	xx vagrant plugin install vagrant-vbguest
+
+	xx :
+	xx vagrant up --no-provision
+
+	xx :
+	xx vagrant reload --provision
+}
+
+command_list-commands() { # outputs all available vagrantx sub-commands
+
+	ensure_help_has_not_been_requested "$@"
+
+	list_commands | 
+	while read action description ; do
+		printf "%-20s  %s\n" "$action" "$description"
+	done
+}
+
+command_redo() { # redo deployment to a vagrant VM during compile/test/edit cycle
+
+	ensure_help_has_not_been_requested "$@"
+
+	ensure_first_up_has_occurred
+
+	rebuild
+
+	deployment_prep
+
+	xx :
+	if [ "$1" = "--reload" ] ; then
+		xx vagrant reload --provision
+	else
+		xx vagrant provision
+	fi
+}
+
+##
+
+main() {
+
+	if help_has_been_requested_p "$@" ; then
+		vagrant "$@"
+		return
+	fi
+
+	local action="${1:?missing argument: command}" ; shift
+
+	if [ "$(type -t "command_${action:?}")" = "function" ] ; then
+		command_"${action:?}" "$@"
+	else
+		ensure_first_up_has_occurred
+
+		xx :
+		xx vagrant "${action:?}" "$@"
+	fi
+}
+
+##
+
+main "$@"
+

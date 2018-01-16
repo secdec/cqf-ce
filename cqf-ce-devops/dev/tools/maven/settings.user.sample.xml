@@ -1,0 +1,150 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+	<!-- 
+		Copyright (C) 2016 - 2017 Applied Visions, Inc.
+
+		Licensed under the Apache License, Version 2.0 (the "License");
+		you may not use this file except in compliance with the License.
+		You may obtain a copy of the License at
+
+			http://www.apache.org/licenses/LICENSE-2.0
+
+		Unless required by applicable law or agreed to in writing, software
+		distributed under the License is distributed on an "AS IS" BASIS,
+		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+		See the License for the specific language governing permissions and
+		limitations under the License.
+	-->
+
+	<servers>
+		<server>
+			<id>artifacts.local</id>
+			<username>builder</username>
+			<password>CHANGE ME</password>
+		</server>
+		<server>
+			<id>artifacts.astam</id>
+			<username>builder</username>
+			<password>CHANGE ME</password>
+		</server>
+	</servers>
+
+	<profiles>
+		<profile>
+			<id>astam-tta3-o1</id>
+		</profile>
+		<profile>
+			<id>astam-tta3-o2</id>
+		</profile>
+		<profile>
+			<!--development mode: continuous integration-->
+			<id>dev.ci</id>
+		</profile>
+		<profile>
+			<!--development mode: compile/test/edit-->
+			<id>dev.cte</id>
+		</profile>
+		<profile>
+			<!--clean mode: completely scrub the source tree-->
+			<id>scrub</id>
+		</profile>
+		<profile>
+			<id>use-local-repositories</id>
+			<repositories>
+				<repository>
+					<id>releases.artifacts.local</id>
+					<name>Local Artifact Repository (Releases)</name>
+					<url>http://YOUR_LOCAL_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-release</url>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>snapshots.artifacts.local</id>
+					<name>Local Artifact Repository (Snapshots)</name>
+					<url>http://YOUR_LOCAL_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-snapshot</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>releases.plugins.local</id>
+					<name>Local Artifact Repository (Releases)</name>
+					<url>http://YOUR_LOCAL_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-release</url>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>snapshots.plugins.local</id>
+					<name>Local Artifact Repository (Snapshots)</name>
+					<url>http://YOUR_LOCAL_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-snapshot</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>use-astam-repositories</id>
+			<repositories>
+				<repository>
+					<id>releases.artifacts.astam</id>
+					<name>ASTAM Artifact Repository (Releases)</name>
+					<url>http://YOUR_ASTAM_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-release</url>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+				<repository>
+					<id>snapshots.artifacts.astam</id>
+					<name>ASTAM Artifact Repository (Snapshots)</name>
+					<url>http://YOUR_ASTAM_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-snapshot</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>releases.plugins.astam</id>
+					<name>ASTAM Plugin Repository (Releases)</name>
+					<url>http://YOUR_ASTAM_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-release</url>
+					<snapshots>
+						<enabled>false</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+				<pluginRepository>
+					<id>snapshots.plugins.astam</id>
+					<name>ASTAM Plugin Repository (Snapshots)</name>
+					<url>http://YOUR_ASTAM_ARTIFACTORY_HOST_AND_PORT/artifactory/libs-snapshot</url>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+
+	<activeProfiles>
+		<!--
+		<activeProfile>use-local-repositories</activeProfile>
+		-->
+		<!--
+		<activeProfile>use-astam-repositories</activeProfile>
+		-->
+		<activeProfile>astam-tta3-o2</activeProfile>
+		<activeProfile>dev.cte</activeProfile>
+	</activeProfiles>
+
+</settings>

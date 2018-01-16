@@ -1,0 +1,34 @@
+{
+    "id" : null,
+    "design" : {
+        "objectKey" : "com.siegetechnologies.cqf.design.item.archetype.two_virtual_machine_ssh_archetype",
+        "object" : null
+    },
+    "parameterBindings" : [ 
+    {
+        "name" : "sshServerVmName",
+        "value": "Ubuntu Router"
+    },
+    {
+        "name" : "sshClientVmName",
+        "value": "Ubuntu Router"
+    },
+    {
+        "name": "networkName",
+        "value": "test-network"
+    },
+        {
+            "name": "switchName",
+            "value": "test-switch"
+        },
+        {
+            "name": "adminusername",
+            "value": "root"
+        },
+        {
+            "name": "adminpassword",
+            "value": "test123"
+        }
+    ],
+    "execution" : null
+}

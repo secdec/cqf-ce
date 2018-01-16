@@ -1,0 +1,1 @@
+@info This is a sensor that retrieves a single file from the testbed machine as an experiment result.

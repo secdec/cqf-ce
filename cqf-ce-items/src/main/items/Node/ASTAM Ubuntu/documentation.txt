@@ -1,0 +1,3 @@
+@info ASTAM Ubuntu Node
+@param Admin login name - The administrator's login name
+@param Admin login password - The administrator's login password

@@ -1,0 +1,29 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+	<id>cqf-items</id>
+	<formats>
+		<format>zip</format>
+	</formats>
+	<includeBaseDirectory>false</includeBaseDirectory>
+	<baseDirectory>items</baseDirectory>
+	<includeSiteDirectory>false</includeSiteDirectory>
+	<fileSets>
+		<fileSet>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory></outputDirectory>
+			<includes>
+				<include>*.md.DISABLED</include>
+				<include>*.txt.DISABLED</include>
+			</includes>
+			<excludes/>
+			<directory></directory>
+		</fileSet>
+		<fileSet>
+			<useDefaultExcludes>true</useDefaultExcludes>
+			<outputDirectory></outputDirectory>
+			<includes/>
+			<excludes/>
+			<directory>src/main/items</directory>
+		</fileSet>
+	</fileSets>
+</assembly>

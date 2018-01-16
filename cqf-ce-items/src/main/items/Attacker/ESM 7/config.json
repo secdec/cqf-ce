@@ -1,0 +1,24 @@
+{
+  "name": "ESM 7",
+  "result_files": [
+    {
+      "target_file": "/cqf/esm7-output.json",
+      "local_destination": "esm7-output.json"
+    }
+  ],
+  "parameters": [
+    {
+      "type": "int",
+      "required": false,
+      "name": "unix_setup_duration",
+      "defaultValue": "5"
+    },
+    {
+      "type": "string",
+      "required": true,
+      "name": "TARGET_IP",
+      "defaultValue": "127.0.0.1"
+    }
+  ]
+
+}

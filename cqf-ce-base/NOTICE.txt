@@ -1,0 +1,39 @@
+Copyright (C) 2009 - 2017 Siege Technologies, LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This code base has the following third-party dependencies:
+     (Apache License 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.8.1 - http://github.com/FasterXML/jackson)
+     (Apache License 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.8.1 - https://github.com/FasterXML/jackson-core)
+     (Apache License 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.8.1 - http://github.com/FasterXML/jackson)
+     (Apache License 2.0) Guava: Google Core Libraries for Java (com.google.guava:guava:18.0 - http://code.google.com/p/guava-libraries/guava)
+     (Apache License 2.0) Jimfs (com.google.jimfs:jimfs:1.1 - https://github.com/google/jimfs/jimfs)
+     (BSD 3-Clause License) yavijava (com.toastcoders:yavijava:6.0.04 - https://github.com/yavijava/yavijava)
+     (Apache License 2.0) Apache Commons BeanUtils (commons-beanutils:commons-beanutils:1.9.2 - http://commons.apache.org/proper/commons-beanutils/)
+     (Apache License 2.0) Commons Codec (commons-codec:commons-codec:1.6 - http://commons.apache.org/codec/)
+     (Apache License 2.0) Commons Collections (commons-collections:commons-collections:3.2.1 - http://commons.apache.org/collections/)
+     (Apache License 2.0) Commons IO (commons-io:commons-io:2.4 - http://commons.apache.org/io/)
+     (Apache License 2.0) Commons Logging (commons-logging:commons-logging:1.1.1 - http://commons.apache.org/logging)
+     (Apache License 2.0) Commons Logging (commons-logging:commons-logging:1.1.3 - http://commons.apache.org/proper/commons-logging/)
+     (BSD-Style DOM4J License) dom4j (dom4j:dom4j:1.6.1 - http://dom4j.org)
+     (Apache License 2.0) Apache Log4j (log4j:log4j:1.2.17 - http://logging.apache.org/log4j/1.2/)
+     (Apache License 2.0) Apache Commons Collections (org.apache.commons:commons-collections4:4.1 - http://commons.apache.org/proper/commons-collections/)
+     (Apache License 2.0) Apache Commons Configuration (org.apache.commons:commons-configuration2:2.1 - http://commons.apache.org/proper/commons-configuration/)
+     (Apache License 2.0) Apache Commons Lang (org.apache.commons:commons-lang3:3.3.2 - http://commons.apache.org/proper/commons-lang/)
+     (Apache License 2.0) dom4j (for Apache Directory Studio) (org.apache.directory.studio:org.dom4j.dom4j:1.6.1 - http://directory.apache.org/studio/parent-libraries/org.dom4j.dom4j/)
+     (Apache License 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.3.6 - http://hc.apache.org/httpcomponents-client)
+     (Apache License 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.3.3 - http://hc.apache.org/httpcomponents-core-ga)
+     (BSD 3-Clause License) Hamcrest Core (org.hamcrest:hamcrest-core:1.3 - https://github.com/hamcrest/JavaHamcrest/hamcrest-core)
+     (The MIT License) Mockito (org.mockito:mockito-core:1.10.19 - http://www.mockito.org)
+     (Apache License 2.0) Objenesis (org.objenesis:objenesis:2.1 - http://objenesis.org)
+     (The MIT License) Project Lombok (org.projectlombok:lombok:1.16.6 - https://projectlombok.org)

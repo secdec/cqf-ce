@@ -1,0 +1,6 @@
+/install-tomcat.extra.d/cqf.xml
+
+/install-tomcat.extra.d/*.properties
+
+/install-tomcat.extra.d/webapps/*.war
+
